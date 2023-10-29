@@ -1,4 +1,7 @@
 package com.example.java.Models;
 
-public class Order {
+import java.util.Date;
+
+public record Order(int OrderId, int ClientId, float price, Date OrderTime) {
+
 }
