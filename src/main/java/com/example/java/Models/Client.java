@@ -1,5 +1,5 @@
 package com.example.java.Models;
 
 
-public record Client(int ClientId, String Email, String Name, String Birthday,boolean Male) {
+public record Client(Integer clientId, String email, String surname, String birthday,boolean male) {
 }
