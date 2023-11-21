@@ -5,7 +5,7 @@ import com.example.java.Models.Client;
 import java.util.List;
 
 public interface ClientRepository {
-    Client read(Integer id);
+    Client read(Integer clientId);
     List<Client> readAll();
     void create(Client client);
     void update(Client client,Integer clientId);

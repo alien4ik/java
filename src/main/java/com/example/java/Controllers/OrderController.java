@@ -1,35 +1,41 @@
 package com.example.java.Controllers;
-
-import com.example.java.DB;
-import com.example.java.Models.Client;
 import com.example.java.Models.Order;
+import com.example.java.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    @GetMapping
-    public ArrayList<Order> getOrders() {
-        return DB.getOrders();
+    private final OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
+    @GetMapping
+    public List<Order> getOrders(){
+        return orderRepository.readAll();
+    }
     @GetMapping("/{orderId}")
-    public Order getOrder(@PathVariable int orderId) {
-        return DB.getOrder(orderId);
+    public Order getOrder(@PathVariable("orderId") Integer orderId) {
+        return orderRepository.read(orderId);
     }
     @PostMapping
-    public Order createOrder(@RequestBody Order order){
-        return DB.createOrder(order);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void  create (@RequestBody Order order){
+        orderRepository.create(order);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{orderId}")
-    public static void updateOrder(@RequestBody Order order, @PathVariable int orderId) {
-        DB.updateOrder(order, orderId);
+    public  void updateClient(@RequestBody Order order, @PathVariable("orderId") Integer orderId) {
+        orderRepository.update(order, orderId);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{orderId}")
-    public static void deleteOrder(@PathVariable int orderId) {
-        DB.deleteOrder(orderId);
+    public void deleteClient(@PathVariable("orderId") Integer orderId) {
+        orderRepository.delete(orderId);
     }
 }

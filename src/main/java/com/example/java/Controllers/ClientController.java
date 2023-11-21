@@ -1,6 +1,4 @@
 package com.example.java.Controllers;
-
-import com.example.java.DB;
 import com.example.java.Models.Client;
 import com.example.java.repository.ClientRepository;
 import org.springframework.http.HttpStatus;
@@ -23,7 +21,6 @@ public class ClientController {
     }
     @GetMapping("/{clientId}")
     public Client getClient(@PathVariable("clientId") Integer clientId) {
-
         return clientRepository.read(clientId);
     }
     @PostMapping
@@ -34,7 +31,7 @@ public class ClientController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{clientId}")
     public  void updateClient(@RequestBody Client client, @PathVariable("clientId") Integer clientId) {
-        clientRepository.update(client, 3);
+        clientRepository.update(client, clientId);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{clientId}")

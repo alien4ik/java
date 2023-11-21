@@ -41,11 +41,11 @@ public class ClientRepositoryH2 implements ClientRepository {
     }
 
     @Override
-    public Client read(Integer id) {
+    public Client read(Integer clientId) {
         try {
-            return jdbcTemplate.queryForObject("select * from clients where clientId = ?", rowMapper, id);
+            return jdbcTemplate.queryForObject("select * from clients where clientId = ?", rowMapper, clientId);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("Client with id = [" + id + "] not found", e);
+            throw new NotFoundException("Client with id = [" + clientId + "] not found", e);
         }
     }
 
