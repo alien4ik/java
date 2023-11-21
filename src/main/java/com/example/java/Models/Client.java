@@ -1,5 +1,7 @@
 package com.example.java.Models;
 
 
-public record Client(Integer clientId, String email, String surname, String birthday,boolean male) {
+import java.util.Date;
+
+public record Client(Integer clientId, String email, String surname, Date birthday, boolean male) {
 }

@@ -2,33 +2,43 @@ package com.example.java.Controllers;
 
 import com.example.java.DB;
 import com.example.java.Models.Client;
+import com.example.java.repository.ClientRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
+    private final ClientRepository clientRepository;
+
+    public ClientController(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
+
     @GetMapping
-    public ArrayList<Client> getClients(){
-        return DB.getClients();
+    public List<Client> getClients(){
+        return clientRepository.readAll();
     }
     @GetMapping("/{clientId}")
-    public Client getClient(@PathVariable int clientId) {
-        return DB.getClient(clientId);
+    public Client getClient(@PathVariable("clientId") Integer clientId) {
+
+        return clientRepository.read(clientId);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client createClient(@RequestBody Client client){
-        return DB.createClient(client);
+    public void  create (@RequestBody Client client){
+        clientRepository.create(client);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{clientId}")
-    public static void updateClient(@RequestBody Client client, @PathVariable int clientId) {
-        DB.updateClient(client, clientId);
+    public  void updateClient(@RequestBody Client client, @PathVariable("clientId") Integer clientId) {
+        clientRepository.update(client, 3);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{clientId}")
-    public static void deleteClient(@PathVariable int clientId) {
-        DB.deleteClient(clientId);
+    public void deleteClient(@PathVariable("clientId") int clientId) {
+        clientRepository.delete(clientId);
     }
 }
