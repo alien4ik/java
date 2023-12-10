@@ -25,17 +25,17 @@ public class OrderController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void  create (@RequestBody Order order){
+    public void  createOrder(@RequestBody Order order){
         orderRepository.create(order);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{orderId}")
-    public  void updateClient(@RequestBody Order order, @PathVariable("orderId") Integer orderId) {
+    public  void updateOrder(@RequestBody Order order, @PathVariable("orderId") Integer orderId) {
         orderRepository.update(order, orderId);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{orderId}")
-    public void deleteClient(@PathVariable("orderId") Integer orderId) {
+    public void deleteOrder(@PathVariable("orderId") Integer orderId) {
         orderRepository.delete(orderId);
     }
 }

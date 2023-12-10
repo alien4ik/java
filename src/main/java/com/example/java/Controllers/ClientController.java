@@ -14,7 +14,7 @@ public class ClientController {
     public ClientController(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
-
+    //если дата заказа больше года то скидка 50%, эндпоинт для клиента, отдельный класс
     @GetMapping
     public List<Client> getClients(){
         return clientRepository.readAll();
@@ -25,7 +25,7 @@ public class ClientController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void  create (@RequestBody Client client){
+    public void  createClient(@RequestBody Client client){
         clientRepository.create(client);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)

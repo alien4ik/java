@@ -16,8 +16,7 @@ import java.util.List;
 public class OrderRepositoryH2 implements OrderRepository {
 
     private static final String CREATE = """
-                        insert into orders (orderId, clientId, price, orderTime)
-                        values (:orderId, :clientId, :price, :orderTime)
+                        INSERT INTO orders (clientId, price, orderTime) VALUES (:clientId, :price, :orderTime)
             """;
     private static final String UPDATE = """
             UPDATE orders

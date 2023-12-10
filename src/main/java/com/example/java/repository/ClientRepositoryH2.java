@@ -17,8 +17,7 @@ import java.util.List;
 public class ClientRepositoryH2 implements ClientRepository {
 
     private static final String CREATE = """
-                        insert into clients (clientId, email, surname, birthday, male)
-                        values (:clientId, :email, :surname, :birthday, :male)
+                        INSERT INTO CLIENTS (email, surname, birthday, male) VALUES (:email, :surname, :birthday, :male)
             """;
     private static final String UPDATE = """
             UPDATE clients
@@ -45,7 +44,7 @@ public class ClientRepositoryH2 implements ClientRepository {
         try {
             return jdbcTemplate.queryForObject("select * from clients where clientId = ?", rowMapper, clientId);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("Client with id = [" + clientId + "] not found", e);
+            throw new NotFoundException("Client with id = [" + clientId + "] not found ", e);
         }
     }
 
